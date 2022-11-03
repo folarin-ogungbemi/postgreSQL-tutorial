@@ -24,6 +24,7 @@ album_table = Table(
 # create variable for "Track" table
 track_table = Table(
     "Track", meta,
+    Column("TrackId", Integer, primary_key=True),
     Column("Name", String),
     Column("Milliseconds", Integer),
     Column("Bytes", Integer),
@@ -37,8 +38,8 @@ track_table = Table(
 # making the connection
 with db.connect() as connection:
 
-    # # Query 1 - select all records from the "Artist" table
-    # select_query = artist_table.select()
+    # Query 1 - select all records from the "Artist" table
+    select_query = artist_table.select()
 
     # # Query 2 - select only the "Name" column from the "Artist" table
     # select_query = artist_table.select().with_only_columns(
@@ -57,8 +58,8 @@ with db.connect() as connection:
 
     # Query 6 - select all the records with "Composer" #Queen
     # from the "Track" table
-    select_query = track_table.select().where(
-        track_table.c.Composer == "Queen")
+    # select_query = track_table.select().where(
+    #     track_table.c.Composer == "Queen")
 
     results = connection.execute(select_query)
     for result in results:
