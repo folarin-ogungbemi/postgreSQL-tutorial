@@ -5,7 +5,7 @@ from sqlalchemy import (
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-# executing th einstructions from the "chinook" database
+# executing the instructions from the "chinook" database
 db = create_engine("postgresql:///chinook")
 base = declarative_base()
 
@@ -79,18 +79,70 @@ tim_berners_lee = Programmer(
     nationality="British",
     famous_for="World Wide Web"
 )
+folarin_ogungbemi = Programmer(
+    first_name="Folarin",
+    last_name="Ogungbemi",
+    gender="M",
+    nationality="Nigerian",
+    famous_for="Code Institute"
+)
 
 
-# add each instance of our programmers to our session
-session.add(ada_lovelace)
-session.add(alan_turing)
-session.add(grace_hopper)
-session.add(margaret_hamilton)
-session.add(bill_gates)
-session.add(tim_berners_lee)
+# # add each instance of our programmers to our session
+# session.add(ada_lovelace)
+# session.add(alan_turing)
+# session.add(grace_hopper)
+# session.add(margaret_hamilton)
+# session.add(bill_gates)
+# session.add(tim_berners_lee)
+# session.add(folarin_ogungbemi)
+
+
+# # updating a single record
+# programmer = session.query(Programmer).filter_by(id=16).first()
+# programmer.famous_for = "World President"
+
+# # updating multiple records
+# people = session.query(Programmer)
+# for person in people:
+#     if person.gender == "F":
+#         person.gender = "Female"
+#     elif person.gender == "M":
+#         person.gender = "Male"
+#     else:
+#         print("gender not defined")
+#     session.commit()
+
 
 # commit our session to the database
 session.commit()
+
+# # deleting a single record
+# fname = input("Enter a first name: ")
+# lname = input("Enter a last name: ")
+
+# programmer = session.query(Programmer).filter_by(
+# first_name=fname, last_name=lname).first()
+# # defensive programming
+# if programmer is not None:
+#     print("Programmer Found: ", programmer.first_name +
+#  " " + programmer.last_name)
+#     confirmation = input("Are you sure you want to delete this record? (y/n) ")
+#     if confirmation.lower() == "y":
+#         session.delete(programmer)
+#         session.commit()
+#         print("Programmer has been deleted")
+#     else:
+#         print("programmer not deleted")
+# else:
+#     print("No records found")
+
+# # deleting a multiple records
+# programmers = session.query(Programmer)
+# for programmer in programmers:
+#     session.delete(programmer)
+#     session.commit()
+
 
 # query the database to find all Programmers
 programmers = session.query(Programmer)
